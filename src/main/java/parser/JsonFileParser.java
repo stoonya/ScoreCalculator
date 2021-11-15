@@ -1,10 +1,11 @@
+package parser;
+
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import parser.Parser;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 public class JsonFileParser implements Parser {
 
@@ -16,12 +17,12 @@ public class JsonFileParser implements Parser {
         this.path = path;
     }
 
-    public <T> ArrayList<T> parse(Class<T> classType) {
+    public <T> List<T> parse(Class<T> classType) {
 
-        ArrayList<T> jsonObjects = null;
+        List<T> jsonObjects = null;
 
         try {
-            JavaType type = objectMapper.getTypeFactory().constructCollectionType(ArrayList.class, classType);
+            JavaType type = objectMapper.getTypeFactory().constructCollectionType(List.class, classType);
             jsonObjects =  objectMapper.readValue(new File(path),type);
 
         } catch (IOException e) {

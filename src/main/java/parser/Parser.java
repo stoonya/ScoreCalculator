@@ -1,7 +1,7 @@
 package parser;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface Parser {
-    <T> ArrayList<T> parse(Class<T> classType);
+    <T> List<T> parse(Class<T> classType);
 }

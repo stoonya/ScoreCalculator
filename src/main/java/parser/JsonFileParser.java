@@ -23,7 +23,7 @@ public class JsonFileParser implements Parser {
 
         try {
             JavaType type = objectMapper.getTypeFactory().constructCollectionType(List.class, classType);
-            jsonObjects =  objectMapper.readValue(new File(path),type);
+            jsonObjects =  objectMapper.readValue(new File(path), type);
 
         } catch (IOException e) {
             e.printStackTrace();

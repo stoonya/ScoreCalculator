@@ -1,4 +1,4 @@
-package resultCalculator;
+package calculator;
 
 import dto.BaseDTO;
 import dto.ResultDTO;

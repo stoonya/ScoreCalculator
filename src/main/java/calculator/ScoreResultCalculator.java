@@ -1,4 +1,4 @@
-package resultCalculator;
+package calculator;
 
 import dto.*;
 import java.util.HashMap;
@@ -7,15 +7,15 @@ import java.util.List;
 
 public class ScoreResultCalculator implements ResultCalculator<ScoreDTO> {
 
-    private ResultDTO addAsNewResult(ScoreDTO jsonObject) {
+    private ResultDTO addAsNewResult(ScoreDTO object) {
         ResultDTO result = new ResultDTO();
 
-        result.id = jsonObject.id;
+        result.id = object.id;
 
         result.ips = new HashMap<String, Integer>();
-        result.ips.put(jsonObject.ip, 1);
+        addIpToResult(result, object.ip, false);
 
-        result.score = jsonObject.score;
+        result.score = object.score;
 
         return result;
     }
@@ -27,14 +27,23 @@ public class ScoreResultCalculator implements ResultCalculator<ScoreDTO> {
 
         for (String ipKey: existingResult.ips.keySet()) {
             if (ipKey.equals(object.ip)) {
-                existingResult.ips.put(ipKey, existingResult.ips.get(ipKey) + 1);
+                addIpToResult(existingResult, ipKey, true);
                 isExistingIp = true;
             }
         }
 
         if (!isExistingIp) {
-            existingResult.ips.put(object.ip, 1);
+            addIpToResult(existingResult, object.ip, false);
         }
+    }
+
+    private void addIpToResult(ResultDTO result, String ip, boolean isExistingIp) {
+
+            if (!isExistingIp) {
+                result.ips.put(ip, 1);
+            } else {
+                result.ips.put(ip, result.ips.get(ip) + 1);
+            }
     }
 
     public void calculateResults(List<ResultDTO> results, List<ScoreDTO> objects) {

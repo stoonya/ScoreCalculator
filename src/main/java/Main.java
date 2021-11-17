@@ -7,8 +7,6 @@ import printer.ResultsPrinter;
 import calculator.ResultCalculator;
 import calculator.ScoreResultCalculator;
 import validator.ScoreObjectsFilter;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -19,8 +17,7 @@ public class Main {
         List<ScoreDTO> jsonObjects = parser.parse(ScoreDTO.class);
 
         ResultCalculator calc = new ScoreResultCalculator();
-        List<ResultDTO> results = new ArrayList<>();
-        calc.calculateResults(results, jsonObjects);
+        List<ResultDTO> results = calc.calculateResults(jsonObjects);
 
         Printer printer = new ResultsPrinter(results);
         printer.print();

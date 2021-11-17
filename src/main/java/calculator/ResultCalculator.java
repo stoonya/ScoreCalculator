@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ResultCalculator <T extends BaseDTO> {
 
-    void calculateResults(List<ResultDTO> results, List<T> objects);
+    List<ResultDTO> calculateResults(List<T> objects);
 }

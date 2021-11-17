@@ -1,6 +1,8 @@
 package calculator;
 
 import dto.*;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,7 +14,7 @@ public class ScoreResultCalculator implements ResultCalculator<ScoreDTO> {
 
         result.id = object.id;
 
-        result.ips = new HashMap<String, Integer>();
+        result.ips = new HashMap<>();
         addIpToResult(result, object.ip, false);
 
         result.score = object.score;
@@ -46,10 +48,13 @@ public class ScoreResultCalculator implements ResultCalculator<ScoreDTO> {
             }
     }
 
-    public void calculateResults(List<ResultDTO> results, List<ScoreDTO> objects) {
+    public List<ResultDTO> calculateResults(List<ScoreDTO> objects) {
+
+        List<ResultDTO> results = new ArrayList<>();
+
         for (ScoreDTO object : objects) {
 
-            if (results == null || results.size() < 1) {
+            if (results.size() == 0) {
 
                 results.add(addAsNewResult(object));
 
@@ -74,5 +79,7 @@ public class ScoreResultCalculator implements ResultCalculator<ScoreDTO> {
                 results.add(addAsNewResult(object));
             }
         }
+
+        return results;
     }
 }

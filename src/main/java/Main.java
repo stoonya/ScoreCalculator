@@ -1,5 +1,5 @@
-import dto.ResultDTO;
-import dto.ScoreDTO;
+import dto.ResultModel;
+import dto.ScoreModel;
 import parser.JsonFileParser;
 import parser.Parser;
 import printer.Printer;
@@ -8,16 +8,17 @@ import calculator.ResultCalculator;
 import calculator.ScoreResultCalculator;
 import validator.ScoreObjectsFilter;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
 
     public static void main(String[] args) {
 
         Parser parser = new JsonFileParser("src/main/java/testData/testData.json", new ScoreObjectsFilter());
-        List<ScoreDTO> jsonObjects = parser.parse(ScoreDTO.class);
+        List<ScoreModel> jsonObjects = parser.parse(ScoreModel.class);
 
         ResultCalculator calc = new ScoreResultCalculator();
-        List<ResultDTO> results = calc.calculateResults(jsonObjects);
+        Map<String, ResultModel> results = calc.calculateResults(jsonObjects);
 
         Printer printer = new ResultsPrinter(results);
         printer.print();

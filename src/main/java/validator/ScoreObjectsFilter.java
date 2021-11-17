@@ -1,13 +1,13 @@
 package validator;
 
-import dto.ScoreDTO;
+import dto.ScoreModel;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ScoreObjectsFilter implements Validator<ScoreDTO> {
+public class ScoreObjectsFilter implements Validator<ScoreModel> {
 
-    public List<ScoreDTO> filter(List<ScoreDTO> list) {
+    public List<ScoreModel> filter(List<ScoreModel> list) {
         return list.stream().filter(o -> isValidObject(o)).collect(Collectors.toList());
     }
 
@@ -28,7 +28,7 @@ public class ScoreObjectsFilter implements Validator<ScoreDTO> {
         return id != null;
     }
 
-    private boolean isValidObject(ScoreDTO object) {
+    private boolean isValidObject(ScoreModel object) {
         return isValidId(object.id) && isValidScore(object.score) && isValidIp(object.ip);
     }
 }

@@ -1,82 +1,47 @@
 package calculator;
 
 import dto.*;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
-public class ScoreResultCalculator implements ResultCalculator<ScoreDTO> {
+public class ScoreResultCalculator implements ResultCalculator<ScoreModel> {
 
-    private ResultDTO addAsNewResult(ScoreDTO object) {
-        ResultDTO result = new ResultDTO();
-
-        result.id = object.id;
+    private void addAsNewResult(ScoreModel object, Map<String, ResultModel> results) {
+        ResultModel result = new ResultModel();
 
         result.ips = new HashMap<>();
-        addIpToResult(result, object.ip, false);
-
+        addIpToResult(result, object.ip);
+        result.id = object.id;
         result.score = object.score;
 
-        return result;
+        results.put(result.id, result);
     }
 
-    private void addToExistingResult(ResultDTO existingResult, ScoreDTO object) {
-        existingResult.score += object.score;
+    private void addToExistingResult(ScoreModel object, ResultModel result) {
+        result.score += object.score;
+        addIpToResult(result, object.ip);
+    }
 
-        boolean isExistingIp = false;
-
-        for (String ipKey: existingResult.ips.keySet()) {
-            if (ipKey.equals(object.ip)) {
-                addIpToResult(existingResult, ipKey, true);
-                isExistingIp = true;
-            }
-        }
-
-        if (!isExistingIp) {
-            addIpToResult(existingResult, object.ip, false);
+    private void addIpToResult(ResultModel result, String ip) {
+        if (result.ips.containsKey(ip)) {
+            result.ips.put(ip, result.ips.get(ip) + 1);
+        } else {
+            result.ips.put(ip, 1);
         }
     }
 
-    private void addIpToResult(ResultDTO result, String ip, boolean isExistingIp) {
+    public Map<String, ResultModel> calculateResults(List<ScoreModel> objects) {
 
-            if (!isExistingIp) {
-                result.ips.put(ip, 1);
+        Map<String, ResultModel> results = new HashMap<>();
+
+        for (ScoreModel object : objects) {
+
+            if (results.containsKey(object.id)) {
+                addToExistingResult(object, results.get(object.id));
             } else {
-                result.ips.put(ip, result.ips.get(ip) + 1);
-            }
-    }
-
-    public List<ResultDTO> calculateResults(List<ScoreDTO> objects) {
-
-        List<ResultDTO> results = new ArrayList<>();
-
-        for (ScoreDTO object : objects) {
-
-            if (results.size() == 0) {
-
-                results.add(addAsNewResult(object));
-
-                continue;
-            }
-
-            boolean isExistingId = false;
-
-            for (ResultDTO result : results) {
-
-                if (result.id.equals(object.id)) {
-
-                    addToExistingResult(result, object);
-
-                    isExistingId = true;
-
-                    break;
-                }
-            }
-
-            if (!isExistingId) {
-                results.add(addAsNewResult(object));
+                addAsNewResult(object, results);
             }
         }
 

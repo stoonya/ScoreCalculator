@@ -1,11 +1,10 @@
 package calculator;
 
-import dto.BaseDTO;
-import dto.ResultDTO;
+import models.ResultModel;
 
 import java.util.List;
 
-public interface ResultCalculator <T extends BaseDTO> {
+public interface ResultCalculator <T> {
 
-    List<ResultDTO> calculateResults(List<T> objects);
+    List<ResultModel> calculateResults(List<T> objects);
 }

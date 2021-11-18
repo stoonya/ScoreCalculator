@@ -1,26 +1,26 @@
 package printer;
 
-import dto.ResultDTO;
+import models.ResultModel;
 
 import java.util.List;
-import java.util.Map;
 
 public class ResultsPrinter implements Printer {
 
-    private List<ResultDTO> results;
+    private List<ResultModel> results;
 
-    public ResultsPrinter(List<ResultDTO> results) {
+    public ResultsPrinter(List<ResultModel> results) {
         this.results = results;
     }
 
     public void print() {
-        for (ResultDTO result : results) {
+        for(ResultModel result: results) {
+            System.out.println(result.getId() + "\n");
 
-            System.out.println(result.id + "\n");
-            for (Map.Entry<String, Integer> ipEntry: result.ips.entrySet()) {
-                System.out.println(ipEntry.getKey() + ": " + ipEntry.getValue() + "\n");
-            }
-            System.out.println("score: " + result.score);
+            result.getIps().forEach((ip, numberOfMatches) -> {
+                System.out.println(ip + ": " + numberOfMatches + "\n");
+            });
+
+            System.out.println("score: " + result.getScore());
             System.out.println("\n");
         }
     }

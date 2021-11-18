@@ -14,9 +14,15 @@ public class JsonFileParser implements Parser {
     private String path;
     private Validator validator;
 
+<<<<<<< Updated upstream:src/main/java/parser/JsonFileParser.java
     public JsonFileParser(String path, Validator validator) {
         this.objectMapper = new ObjectMapper();
         this.validator = validator;
+=======
+    public JsonFileScoreParser(String path) {
+        // Assumption: Extra fields from JSON are ignored (fields that are not "id", "ip" and "score")
+        this.objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);;
+>>>>>>> Stashed changes:src/main/java/parser/JsonFileScoreParser.java
         this.path = path;
     }
 

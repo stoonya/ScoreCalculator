@@ -8,7 +8,6 @@ import calculator.ResultCalculator;
 import calculator.ScoreResultCalculator;
 import validator.ScoreObjectsFilter;
 import java.util.List;
-import java.util.Map;
 
 public class Main {
 
@@ -18,7 +17,7 @@ public class Main {
         List<ScoreModel> jsonObjects = parser.parse(ScoreModel.class);
 
         ResultCalculator calc = new ScoreResultCalculator();
-        Map<String, ResultModel> results = calc.calculateResults(jsonObjects);
+        List<ResultModel> results = calc.calculateResults(jsonObjects);
 
         Printer printer = new ResultsPrinter(results);
         printer.print();

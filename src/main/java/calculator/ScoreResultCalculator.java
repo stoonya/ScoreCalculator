@@ -1,6 +1,8 @@
 package calculator;
 
 import dto.*;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +34,7 @@ public class ScoreResultCalculator implements ResultCalculator<ScoreModel> {
         }
     }
 
-    public Map<String, ResultModel> calculateResults(List<ScoreModel> objects) {
+    public List<ResultModel> calculateResults(List<ScoreModel> objects) {
 
         Map<String, ResultModel> results = new HashMap<>();
 
@@ -45,6 +47,6 @@ public class ScoreResultCalculator implements ResultCalculator<ScoreModel> {
             }
         }
 
-        return results;
+        return new ArrayList<>(results.values());
     }
 }

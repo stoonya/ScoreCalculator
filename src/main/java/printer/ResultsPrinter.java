@@ -2,18 +2,18 @@ package printer;
 
 import dto.ResultModel;
 
-import java.util.Map;
+import java.util.List;
 
 public class ResultsPrinter implements Printer {
 
-    private Map<String, ResultModel> results;
+    private List<ResultModel> results;
 
-    public ResultsPrinter(Map<String, ResultModel> results) {
+    public ResultsPrinter(List<ResultModel> results) {
         this.results = results;
     }
 
     public void print() {
-        results.forEach((key, result) -> {
+        for(ResultModel result: results) {
             System.out.println(result.id + "\n");
 
             result.ips.forEach((ip, numberOfMatches) -> {
@@ -22,6 +22,6 @@ public class ResultsPrinter implements Printer {
 
             System.out.println("score: " + result.score);
             System.out.println("\n");
-        });
+        }
     }
 }

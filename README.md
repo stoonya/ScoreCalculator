@@ -33,3 +33,10 @@ test2:
  
 
 Goal: Design and implement both the program to accomplish this, and the script to test the program in Java.
+
+# Assumptions:
+1. If id is null, skip the entire result object
+2. If ip is null or not in valid format (IPv4 or IPv6), skip the entire result object
+3. Score is an integer
+4. If score is null or less than 0, skip the entire result object
+5. Extra fields from JSON are ignored (fields that are not "id", "ip" and "score")

@@ -12,7 +12,7 @@ public class ScoreResultCalculator implements ResultCalculator<ScoreModel> {
 
     private void addAsNewResult(ScoreModel object, Map<String, ResultModel> results) {
 
-        ResultModel result = new ResultModel(object.getId(), new HashMap<>(), object.getScore());
+        ResultModel result = new ResultModel(object.getId(), object.getScore());
         addIpToResult(result, object.getIp());
 
         results.put(result.getId(), result);

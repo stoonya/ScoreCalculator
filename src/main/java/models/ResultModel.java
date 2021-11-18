@@ -8,9 +8,9 @@ public class ResultModel {
     private HashMap<String, Integer> ips;
     private int score;
 
-    public ResultModel(String id, HashMap<String, Integer> ips, int score) {
+    public ResultModel(String id, int score) {
         this.id = id;
-        this.ips = ips;
+        this.ips = new HashMap<>();
         this.score = score;
     }
 

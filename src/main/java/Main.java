@@ -1,5 +1,5 @@
-import dto.ResultModel;
-import dto.ScoreModel;
+import models.ResultModel;
+import models.ScoreModel;
 import parser.JsonFileParser;
 import parser.Parser;
 import printer.Printer;

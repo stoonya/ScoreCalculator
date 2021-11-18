@@ -1,6 +1,6 @@
 package printer;
 
-import dto.ResultModel;
+import models.ResultModel;
 
 import java.util.List;
 

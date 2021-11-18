@@ -1,4 +1,4 @@
-package dto;
+package models;
 
 public class ScoreModel {
     public String id;

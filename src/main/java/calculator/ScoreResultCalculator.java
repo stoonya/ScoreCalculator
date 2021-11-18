@@ -1,6 +1,6 @@
 package calculator;
 
-import dto.*;
+import models.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,6 +1,6 @@
 package validator;
 
-import dto.ScoreModel;
+import models.ScoreModel;
 
 import java.util.List;
 import java.util.stream.Collectors;

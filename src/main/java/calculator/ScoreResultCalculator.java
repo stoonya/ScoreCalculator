@@ -11,26 +11,23 @@ import java.util.Map;
 public class ScoreResultCalculator implements ResultCalculator<ScoreModel> {
 
     private void addAsNewResult(ScoreModel object, Map<String, ResultModel> results) {
-        ResultModel result = new ResultModel();
 
-        result.ips = new HashMap<>();
-        addIpToResult(result, object.ip);
-        result.id = object.id;
-        result.score = object.score;
+        ResultModel result = new ResultModel(object.getId(), new HashMap<>(), object.getScore());
+        addIpToResult(result, object.getIp());
 
-        results.put(result.id, result);
+        results.put(result.getId(), result);
     }
 
     private void addToExistingResult(ScoreModel object, ResultModel result) {
-        result.score += object.score;
-        addIpToResult(result, object.ip);
+        result.setScore(result.getScore() + object.getScore());
+        addIpToResult(result, object.getIp());
     }
 
     private void addIpToResult(ResultModel result, String ip) {
-        if (result.ips.containsKey(ip)) {
-            result.ips.put(ip, result.ips.get(ip) + 1);
+        if (result.getIps().containsKey(ip)) {
+            result.getIps().put(ip, result.getIps().get(ip) + 1);
         } else {
-            result.ips.put(ip, 1);
+            result.getIps().put(ip, 1);
         }
     }
 
@@ -40,8 +37,8 @@ public class ScoreResultCalculator implements ResultCalculator<ScoreModel> {
 
         for (ScoreModel object : objects) {
 
-            if (results.containsKey(object.id)) {
-                addToExistingResult(object, results.get(object.id));
+            if (results.containsKey(object.getId())) {
+                addToExistingResult(object, results.get(object.getId()));
             } else {
                 addAsNewResult(object, results);
             }

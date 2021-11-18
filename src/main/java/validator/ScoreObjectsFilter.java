@@ -29,6 +29,6 @@ public class ScoreObjectsFilter implements Validator<ScoreModel> {
     }
 
     private boolean isValidObject(ScoreModel object) {
-        return isValidId(object.id) && isValidScore(object.score) && isValidIp(object.ip);
+        return isValidId(object.getId()) && isValidScore(object.getScore()) && isValidIp(object.getIp());
     }
 }

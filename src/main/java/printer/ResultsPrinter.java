@@ -14,13 +14,13 @@ public class ResultsPrinter implements Printer {
 
     public void print() {
         for(ResultModel result: results) {
-            System.out.println(result.id + "\n");
+            System.out.println(result.getId() + "\n");
 
-            result.ips.forEach((ip, numberOfMatches) -> {
+            result.getIps().forEach((ip, numberOfMatches) -> {
                 System.out.println(ip + ": " + numberOfMatches + "\n");
             });
 
-            System.out.println("score: " + result.score);
+            System.out.println("score: " + result.getScore());
             System.out.println("\n");
         }
     }

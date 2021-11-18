@@ -18,9 +18,9 @@ public class ScoreObjectsFilter implements Validator<ScoreModel> {
     }
 
     // assumption #3: if score is null or not valid, skip the entire result object
-    // assumption #4: valid score means positive integer
+    // assumption #4: valid score means positive integer or 0
     private boolean isValidScore(int score) {
-        return score > 0;
+        return score >= 0;
     }
 
     // assumption #5: if id is null, skip the entire result object

@@ -3,7 +3,6 @@ package parser;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import validator.Validator;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,11 +12,9 @@ public class JsonFileParser implements Parser {
 
     private ObjectMapper objectMapper;
     private String path;
-    private Validator validator;
 
-    public JsonFileParser(String path, Validator validator) {
+    public JsonFileParser(String path) {
         this.objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);;
-        this.validator = validator;
         this.path = path;
     }
 
@@ -33,6 +30,6 @@ public class JsonFileParser implements Parser {
             e.printStackTrace();
         }
 
-        return validator.filter(jsonObjects);
+        return jsonObjects;
     }
 }

@@ -7,6 +7,12 @@ public class ScoreModel {
     private int score;
     private String ip;
 
+    public ScoreModel(String id, int score, String ip) {
+        this.id = id;
+        this.score = score;
+        this.ip = ip;
+    }
+
     public String getId() {
         return id;
     }
